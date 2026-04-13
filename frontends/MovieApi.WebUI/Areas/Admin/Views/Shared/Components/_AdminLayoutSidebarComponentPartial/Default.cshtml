@@ -1,0 +1,653 @@
+﻿
+
+<aside class="sidebar-wrapper" data-simplebar="true">
+    <div class="sidebar-header">
+        <div>
+            <img src="/ltr/assets/images/logo-icon-2.png" class="logo-icon" alt="logo icon">
+        </div>
+        <div>
+            <h4 class="logo-text">Fobia</h4>
+        </div>
+    </div>
+
+    <ul class="metismenu" id="menu">
+
+        <!-- Dashboard -->
+        <li>
+            <a asp-area="Admin" asp-controller="AdminLayout" asp-action="Index">
+                <div class="parent-icon"><ion-icon name="home-outline"></ion-icon></div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+
+        <li class="menu-label">Content Management</li>
+
+        <!-- Movies -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="film-outline"></ion-icon></div>
+                <div class="menu-title">Movies</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Movie" asp-action="MoviesList">
+                        <ion-icon name="ellipse-outline"></ion-icon>Movie List
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Movie" asp-action="CreateMovie">
+                        <ion-icon name="ellipse-outline"></ion-icon>Add Movie
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Movie" asp-action="FeaturedMovies">
+                        <ion-icon name="ellipse-outline"></ion-icon>Featured Movies
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Series -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="tv-outline"></ion-icon></div>
+                <div class="menu-title">TV Series</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Series" asp-action="SeriesList">
+                        <ion-icon name="ellipse-outline"></ion-icon>Series List
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Series" asp-action="CreateSeries">
+                        <ion-icon name="ellipse-outline"></ion-icon>Add Series
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Season" asp-action="SeasonsList">
+                        <ion-icon name="ellipse-outline"></ion-icon>Season & Episode Management
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Series" asp-action="FeaturedSeries">
+                        <ion-icon name="ellipse-outline"></ion-icon>Featured Series
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Categories -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="list-outline"></ion-icon></div>
+                <div class="menu-title">Categories</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Category" asp-action="CategoryList">
+                        <ion-icon name="ellipse-outline"></ion-icon>Category List
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Category" asp-action="CreateCategory">
+                        <ion-icon name="ellipse-outline"></ion-icon>Add Category
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Category" asp-action="GenresList">
+                        <ion-icon name="ellipse-outline"></ion-icon>Genres
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- People -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="people-outline"></ion-icon></div>
+                <div class="menu-title">People</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Cast" asp-action="CastsList">
+                        <ion-icon name="ellipse-outline"></ion-icon>Actors
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Cast" asp-action="DirectorsList">
+                        <ion-icon name="ellipse-outline"></ion-icon>Directors
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-label">Reviews & Ratings</li>
+
+        <!-- Comments -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="chatbubbles-outline"></ion-icon></div>
+                <div class="menu-title">Comments</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Review" asp-action="ListReviews">
+                        <ion-icon name="ellipse-outline"></ion-icon>All Comments
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Review" asp-action="ListMovieReviews">
+                        <ion-icon name="ellipse-outline"></ion-icon>Movie Comments
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Review" asp-action="ListSeriesReviews">
+                        <ion-icon name="ellipse-outline"></ion-icon>series Comments
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Review" asp-action="ListEpisodeReviews">
+                        <ion-icon name="ellipse-outline"></ion-icon>Episode Comments
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Ratings -->
+        <li>
+            <a asp-area="Admin" asp-controller="Rating" asp-action="RatingsList">
+                <div class="parent-icon"><ion-icon name="star-outline"></ion-icon></div>
+                <div class="menu-title">Ratings</div>
+            </a>
+        </li>
+
+        <li class="menu-label">AI & Analytics</li>
+
+        <!-- AI -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="sparkles-outline"></ion-icon></div>
+                <div class="menu-title">AI Integration</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="AI" asp-action="RecommendationEngine">
+                        <ion-icon name="ellipse-outline"></ion-icon>Recommendation Engine
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="AI" asp-action="SentimentAnalysis">
+                        <ion-icon name="ellipse-outline"></ion-icon>Sentiment Analysis
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="AI" asp-action="AISettings">
+                        <ion-icon name="ellipse-outline"></ion-icon>AI Settings
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- ML -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="bar-chart-outline"></ion-icon></div>
+                <div class="menu-title">ML & Predictions</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="ML" asp-action="ModelManagement">
+                        <ion-icon name="ellipse-outline"></ion-icon>Model Management
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="ML" asp-action="PredictionResults">
+                        <ion-icon name="ellipse-outline"></ion-icon>Prediction Results
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="ML" asp-action="ModelTraining">
+                        <ion-icon name="ellipse-outline"></ion-icon>Model Training
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Statistics -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="analytics-outline"></ion-icon></div>
+                <div class="menu-title">Statistics</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Stats" asp-action="ContentStatistics">
+                        <ion-icon name="ellipse-outline"></ion-icon>Content Statistics
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Stats" asp-action="UserStatistics">
+                        <ion-icon name="ellipse-outline"></ion-icon>User Statistics
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Stats" asp-action="EngagementReport">
+                        <ion-icon name="ellipse-outline"></ion-icon>Engagement Report
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-label">User Management</li>
+
+        <!-- Users -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="person-outline"></ion-icon></div>
+                <div class="menu-title">Users</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="User" asp-action="UsersList">
+                        <ion-icon name="ellipse-outline"></ion-icon>User List
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="User" asp-action="RolesPermissions">
+                        <ion-icon name="ellipse-outline"></ion-icon>Roles & Permissions
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="User" asp-action="BannedUsers">
+                        <ion-icon name="ellipse-outline"></ion-icon>Banned Users
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-label">System</li>
+
+        <!-- Settings -->
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><ion-icon name="settings-outline"></ion-icon></div>
+                <div class="menu-title">Settings</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Settings" asp-action="GeneralSettings">
+                        <ion-icon name="ellipse-outline"></ion-icon>General Settings
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Settings" asp-action="AppearanceSettings">
+                        <ion-icon name="ellipse-outline"></ion-icon>Appearance
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Settings" asp-action="NotificationSettings">
+                        <ion-icon name="ellipse-outline"></ion-icon>Notifications
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a asp-area="Admin" asp-controller="AdminLayout" asp-action="Documentation">
+                <div class="parent-icon"><ion-icon name="document-text-outline"></ion-icon></div>
+                <div class="menu-title">Documentation</div>
+            </a>
+        </li>
+
+    </ul>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+    <aside class="sidebar-wrapper" data-simplebar="true">
+    <div class="sidebar-header">
+        <div>
+            <img src="/ltr/assets/images/logo-icon-2.png" class="logo-icon" alt="logo icon">
+        </div>
+        <div>
+            <h4 class="logo-text">Fobia</h4>
+        </div>
+    </div>
+    <!--navigation-->
+    <ul class="metismenu" id="menu">
+
+        <!-- Dashboard -->
+        <li>
+            <a href="index.html">
+                <div class="parent-icon">
+                    <ion-icon name="home-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+
+        <li class="menu-label">Content Management</li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="film-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Movies</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="movies-list.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Movie List
+                    </a>
+                </li>
+                <li>
+                    <a href="movies-add.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Add Movie
+                    </a>
+                </li>
+                <li>
+                    <a href="movies-featured.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Featured Movies
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="tv-outline"></ion-icon>
+                </div>
+                <div class="menu-title">TV Series</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="series-list.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Series List
+                    </a>
+                </li>
+                <li>
+                    <a href="series-add.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Add Series
+                    </a>
+                </li>
+                <li>
+                    <a href="series-seasons.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Season & Episode Management
+                    </a>
+                </li>
+                <li>
+                    <a href="series-featured.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Featured Series
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="list-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Categories</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="categories-list.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Category List
+                    </a>
+                </li>
+                <li>
+                    <a href="categories-add.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Add Category
+                    </a>
+                </li>
+                <li>
+                    <a href="genres-list.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Genres
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="people-outline"></ion-icon>
+                </div>
+                <div class="menu-title">People</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="persons-actors.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Actors
+                    </a>
+                </li>
+                <li>
+                    <a href="persons-directors.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Directors
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-label">Reviews & Ratings</li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Comments</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="comments-all.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>All Comments
+                    </a>
+                </li>
+                <li>
+                    <a href="comments-pending.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Pending Comments
+                    </a>
+                </li>
+                <li>
+                    <a href="comments-reported.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Reported Comments
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="ratings.html">
+                <div class="parent-icon">
+                    <ion-icon name="star-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Ratings</div>
+            </a>
+        </li>
+
+        <li class="menu-label">AI & Analytics</li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="sparkles-outline"></ion-icon>
+                </div>
+                <div class="menu-title">AI Integration</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="ai-recommendations.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Recommendation Engine
+                    </a>
+                </li>
+                <li>
+                    <a href="ai-sentiment.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Sentiment Analysis
+                    </a>
+                </li>
+                <li>
+                    <a href="ai-settings.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>AI Settings
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="bar-chart-outline"></ion-icon>
+                </div>
+                <div class="menu-title">ML & Predictions</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="ml-models.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Model Management
+                    </a>
+                </li>
+                <li>
+                    <a href="ml-predictions.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Prediction Results
+                    </a>
+                </li>
+                <li>
+                    <a href="ml-training.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Model Training
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="analytics-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Statistics</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="stats-content.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Content Statistics
+                    </a>
+                </li>
+                <li>
+                    <a href="stats-users.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>User Statistics
+                    </a>
+                </li>
+                <li>
+                    <a href="stats-engagement.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Engagement Report
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-label">User Management</li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="person-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Users</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="users-list.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>User List
+                    </a>
+                </li>
+                <li>
+                    <a href="users-roles.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Roles & Permissions
+                    </a>
+                </li>
+                <li>
+                    <a href="users-banned.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Banned Users
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-label">System</li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <ion-icon name="settings-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Settings</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="settings-general.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>General Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="settings-appearance.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Appearance
+                    </a>
+                </li>
+                <li>
+                    <a href="settings-notifications.html">
+                        <ion-icon name="ellipse-outline"></ion-icon>Notifications
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="pages-errors-404-error.html">
+                <div class="parent-icon">
+                    <ion-icon name="document-text-outline"></ion-icon>
+                </div>
+                <div class="menu-title">Documentation</div>
+            </a>
+        </li>
+
+    </ul>
+    <!--end navigation-->
+</aside>
+
+ *@
+
+

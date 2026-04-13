@@ -1,0 +1,273 @@
+﻿@model ResultAdminEpisodeDto
+
+@{
+    ViewData["Title"] = "DetailEpisode";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .detail-wrapper {
+        padding: 32px;
+        max-width: 1100px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 28px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .episode-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        padding: 36px;
+    }
+
+    .episode-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .episode-title {
+        font-size: 26px;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.5px;
+    }
+
+    .type-pill {
+        padding: 5px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+        .type-pill.movie {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .type-pill.series {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+    .episode-parent {
+        font-size: 13px;
+        color: #6366f1;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+    }
+
+    .episode-description {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.8;
+        margin-bottom: 28px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #f1f5f9;
+        max-width: 680px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+    }
+
+    .stat-box {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 18px 20px;
+        text-align: center;
+    }
+
+        .stat-box .stat-label {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stat-box .stat-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+            .stat-box .stat-value.small {
+                font-size: 15px;
+            }
+
+    .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-bottom: 28px;
+    }
+
+    .meta-item {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 14px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+        .meta-item .meta-label {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+        }
+
+        .meta-item .meta-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        padding-top: 24px;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .btn-edit {
+        padding: 9px 22px;
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.18s;
+    }
+
+        .btn-edit:hover {
+            background: #4f46e5;
+            color: #fff;
+        }
+
+    .btn-back {
+        padding: 9px 22px;
+        background: #f1f5f9;
+        color: #475569;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.18s;
+    }
+
+        .btn-back:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+</style>
+
+<div class="detail-wrapper">
+    <div class="page-title">🎬 Episode Detail</div>
+
+    <div class="episode-card">
+
+        <!-- Başlık + Type Badge -->
+        <div class="episode-header">
+            <div class="episode-title">@Model.Title</div>
+            @if (Model.ParentType?.ToLower() == "movie")
+            {
+                <span class="type-pill movie">🎬 Movie Episode</span>
+            }
+            else
+            {
+                <span class="type-pill series">📺 Series Episode</span>
+            }
+        </div>
+
+        <div class="episode-parent">@Model.ParentName — @Model.SeasonName</div>
+
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <div class="episode-description">@Model.Description</div>
+        }
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">Episode Number</div>
+                <div class="stat-value">#@Model.EpisodeNumber</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Season</div>
+                <div class="stat-value small">@Model.SeasonName</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Belongs To</div>
+                <div class="stat-value small">@Model.ParentName</div>
+            </div>
+        </div>
+
+        <!-- Meta -->
+        <div class="meta-grid">
+            <div class="meta-item">
+                <span class="meta-label">Season ID</span>
+                <span class="meta-value">#@Model.SeasonId</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Type</span>
+                <span class="meta-value">
+                    @(Model.ParentType?.ToLower() == "movie" ? "🎬 Movie" : "📺 Series")
+                </span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Parent Program</span>
+                <span class="meta-value">@Model.ParentName</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Episode ID</span>
+                <span class="meta-value">#@Model.Id</span>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a asp-area="Admin"
+               asp-controller="Episode"
+               asp-action="UpdateEpisode"
+               asp-route-id="@Model.Id"
+               class="btn-edit">✏️ Edit Episode</a>
+            
+               <a asp-area="Admin" asp-controller="Review" asp-action="GetEpisodeReviewById" asp-route-id="@Model.Id"
+               class="btn btn-outline-primary">Show Reviews</a>
+            
+               <a href="javascript:history.back()" class="btn-back" class="btn btn-outline-danger">← Back to List</a>
+        </div>
+
+    </div>
+</div>

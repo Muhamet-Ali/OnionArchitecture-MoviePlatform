@@ -1,0 +1,94 @@
+﻿@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+
+<header class="ht-header">
+    <div class="container">
+        <nav class="navbar navbar-default navbar-custom">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header logo">
+                <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <div id="nav-icon1">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <a asp-controller="Movie" asp-action="MovieList"><img class="logo" src="/Film-Review-Movie-Database/images/logo1.png" alt="" width="119" height="58"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav flex-child-menu menu-left">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="dropdown first @(controller == "HomePage" ? "active" : "")">
+                        <a asp-controller="HomePage" asp-action="HomePage">Home</a>
+                    </li>
+
+                    <li class="dropdown first @(controller == "Movie" ? "active" : "")">
+                        <a asp-controller="Movie" asp-action="MovieList">Movies</a>
+                    </li>
+
+                    <li class="dropdown first @(controller == "Series" ? "active" : "")">
+                        <a asp-controller="Series" asp-action="SeriesList">Series</a>
+                    </li>
+
+                    <li class="dropdown first @(controller == "Blog" ? "active" : "")">
+                        <a asp-controller="Cast" asp-action="GetCast">Casts</a>
+                    </li>
+
+                    <li class="dropdown first @(controller == "Review" ? "active" : "")">
+                        <a asp-controller="Review" asp-action="ReviewList">Comments</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav flex-child-menu menu-right">
+                    <li class="dropdown first">
+                        <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+                            pages <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu level1">
+                            <li><a href="#">Casts</a></li>
+                            <li><a href="#">New Loading</a></li>
+                            <li><a href="#">Coming Soon</a></li>
+                            <li><a href="#">Others</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Help</a></li>
+
+                   
+
+                    @if (Context.Session.GetString("AccessToken") != null)
+                    {
+                        var userName = Context.Session.GetString("UserName");
+                        var userEmail = Context.Session.GetString("Email");
+                        var userId = Context.Session.GetString("UserId");
+                        
+                        <li class="dropdown first">
+                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+                                @userName <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                           
+                            <ul class="dropdown-menu level1">
+                                <li><a asp-controller="Profile" asp-action="Index">Profile</a></li>
+                                <li><a asp-controller="Login" asp-action="Logout">Logout</a></li>
+                            </ul>
+                        </li>
+                        <li><a asp-controller="Purchase" asp-action="MyProgramList" asp-route-id="@userId">My Programs</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Login" asp-action="SignIn">Log In</a></li>
+                        <li><a asp-controller="Register" asp-action="Signup">Sign Up</a></li>
+                    }
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <!-- top search form -->
+
+    </div>
+</header>

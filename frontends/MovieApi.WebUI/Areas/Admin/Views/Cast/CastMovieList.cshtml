@@ -1,0 +1,130 @@
+﻿@model List<ResultAdminMovieCastDto>
+
+@{
+    ViewData["Title"] = "CastMovieList";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";int count = 0;
+}
+
+
+
+<style>
+    .card {
+        border-radius: 14px;
+        border: 1px solid rgba(0,0,0,.08);
+        box-shadow: 0 10px 28px rgba(0,0,0,.10)
+    }
+
+    .table-responsive {
+        border-radius: 12px;
+        overflow: hidden
+    }
+
+    .table thead.table-secondary {
+        background: linear-gradient(90deg,#eef2ff,#e0f2fe)
+    }
+
+    .table tbody tr:hover {
+        background: #f8fafc
+    }
+
+    input.form-control {
+        border-radius: 12px;
+        border: 1px solid rgba(0,0,0,.12)
+    }
+
+    .btn {
+        border-radius: 10px
+    }
+
+    img.rounded-circle {
+        object-fit: cover;
+        border: 2px solid rgba(0,0,0,.08)
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center">
+            <h5 class="mb-0">Customer Details</h5>
+            <form class="ms-auto position-relative">
+                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><ion-icon name="search-sharp"></ion-icon></div>
+                <input class="form-control ps-5" type="text" placeholder="search">
+            </form>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>ImageUrl</th>
+                        <th>CharacterName</th>
+
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+
+                            <td>@item.Name</td>
+
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="@item.ImageUrl" class="rounded-circle" width="44" height="44" alt="">
+                                </div>
+                            </td>
+                            <td>@item.CharacterName</td>
+
+
+
+                            <td>
+                                <div class="d-flex gap-2">
+
+                                    <a class="btn btn-sm btn-warning"
+                                       asp-area="Admin"
+                                       asp-controller="Cast"
+                                       asp-action="UpdateCast"
+                                       asp-route-id="@item.Id">
+                                        Update
+                                    </a>
+
+                                    <a class="btn btn-sm btn-danger"
+                                       asp-area="Admin"
+                                       asp-controller="Cast"
+                                       asp-action="DeleteCast"
+                                       asp-route-id="@item.Id"
+                                       onclick="return confirm('Delete this category?');">
+                                        Delete
+                                    </a>
+
+                                    <a class="btn btn-info"
+                                       asp-area="Admin"
+                                       asp-controller="Cast"
+                                       asp-action="DetailCast"
+                                       asp-route-id="@item.Id">
+                                        Detail
+                                    </a>
+
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a class="btn btn-primary"
+               asp-area="Admin"
+               asp-controller="Cast"
+               asp-action="CreateCast">
+                Create New Cast
+            </a>
+            <a href="javascript:history.back()" class="btn-back" class="btn btn-outline-danger">← Back to List</a>
+
+        </div>
+    </div>
+</div>
+

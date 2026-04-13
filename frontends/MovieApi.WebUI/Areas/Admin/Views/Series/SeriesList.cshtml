@@ -1,0 +1,147 @@
+﻿@model List<MovieApi.Dto.DTOs.AdminSeriesDtos.ResultSeriesDto>
+@{
+    ViewData["Title"] = "SeriesList";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+
+}
+
+<style>
+    .card {
+        border-radius: 14px;
+        border: 1px solid rgba(0,0,0,.08);
+        box-shadow: 0 10px 28px rgba(0,0,0,.10)
+    }
+
+    .table-responsive {
+        overflow-x: auto; /* yatay scroll */
+        overflow-y: hidden;
+    }
+
+    .table {
+        min-width: 1200px; /* tabloyu zorla genişlet */
+        white-space: nowrap;
+    }
+
+    .table thead.table-secondary {
+        background: linear-gradient(90deg,#eef2ff,#e0f2fe)
+    }
+
+    .table tbody tr:hover {
+        background: #f8fafc
+    }
+
+    input.form-control {
+        border-radius: 12px;
+        border: 1px solid rgba(0,0,0,.12)
+    }
+
+    .btn {
+        border-radius: 10px
+    }
+
+    img.rounded-circle {
+        object-fit: cover;
+        border: 2px solid rgba(0,0,0,.08)
+    }
+</style>
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center">
+            <h5 class="mb-0">Series Details</h5>
+            <form class="ms-auto position-relative">
+                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><ion-icon name="search-sharp"></ion-icon></div>
+                <input class="form-control ps-5" type="text" placeholder="search">
+            </form>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Category Name</th>
+                        <th>Cover Image</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.Title</td>
+                            <td>@item.CategoryName</td>
+
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="@item.CoverImageUrl" class="rounded-circle" width="44" height="44" alt="">
+                                    <div><p class="mb-0">@item.Title</p></div>
+                                </div>
+                            </td>
+
+                            
+                            <td>
+                                @if (item.Status)
+                                {
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle">
+                                        Active
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle">
+                                        Passive
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a class="btn btn-sm btn-warning"
+                                       asp-area="Admin"
+                                       asp-controller="Series"
+                                       asp-action="UpdateSeries"
+                                       asp-route-id="@item.Id">
+                                        Update
+                                    </a>
+
+                                    <a class="btn btn-sm btn-danger"
+                                       asp-area="Admin"
+                                       asp-controller="Series"
+                                       asp-action="DeleteSeries"
+                                       asp-route-id="@item.Id"
+                                       onclick="return confirm('Delete this series?');">
+                                        Delete
+                                    </a>
+                                    <a class="btn btn-info"
+                                       asp-area="Admin"
+                                       asp-controller="Series"
+                                       asp-action="DetailSeries"
+                                       asp-route-id="@item.Id">
+                                        Detail
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a class="btn btn-primary"
+               asp-area="Admin"
+               asp-controller="Series"
+               asp-action="CreateSeries">
+                Create New Series
+            </a>
+            <a href="javascript:history.back()" class="btn-back" class="btn btn-outline-danger">← Back to List</a>
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,321 @@
+﻿@model ResultAdminCastDto
+
+@{
+    ViewData["Title"] = "DetailCast";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .detail-wrapper {
+        padding: 32px;
+        max-width: 1100px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 28px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .cast-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        overflow: hidden;
+        display: flex;
+        gap: 0;
+    }
+
+    .cast-poster {
+        width: 240px;
+        min-height: 360px;
+        flex-shrink: 0;
+        background: #0f172a;
+        position: relative;
+    }
+
+        .cast-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    .works-badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: rgba(15,23,42,0.82);
+        color: #facc15;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 5px 11px;
+        border-radius: 20px;
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .cast-info {
+        flex: 1;
+        padding: 32px 36px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cast-name {
+        font-size: 26px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 4px;
+        letter-spacing: -0.5px;
+    }
+
+    .cast-title-label {
+        font-size: 13px;
+        color: #6366f1;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+    }
+
+    .cast-overview {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.7;
+        margin-bottom: 12px;
+        max-width: 580px;
+    }
+
+    .cast-bio {
+        font-size: 13px;
+        color: #64748b;
+        line-height: 1.7;
+        margin-bottom: 24px;
+        max-width: 580px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .section-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
+
+    .works-section {
+        margin-bottom: 20px;
+    }
+
+    .works-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+
+    .work-pill {
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+        .work-pill.movie {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .work-pill.series {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .work-pill.empty {
+            background: #f1f5f9;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+    .stats-row {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 24px;
+    }
+
+    .stat-box {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 20px;
+        text-align: center;
+        min-width: 90px;
+    }
+
+        .stat-box .stat-label {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .stat-box .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 16px;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .btn-edit {
+        padding: 9px 22px;
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.18s;
+    }
+
+        .btn-edit:hover {
+            background: #4f46e5;
+            color: #fff;
+        }
+
+    .btn-back {
+        padding: 9px 22px;
+        background: #f1f5f9;
+        color: #475569;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.18s;
+    }
+
+        .btn-back:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+</style>
+
+<div class="detail-wrapper">
+    <div class="page-title">🎭 Cast Detail</div>
+
+    <div class="cast-card">
+
+        <!-- Fotoğraf -->
+        <div class="cast-poster">
+            <img src="@Model.ImageUrl" alt="@Model.FullName"
+                 onerror="this.src='/images/no-poster.png'" />
+            <div class="works-badge">
+                🎬 @Model.FilmographyCount works
+            </div>
+        </div>
+
+        <!-- Bilgiler -->
+        <div class="cast-info">
+
+            <div class="cast-name">@Model.FullName</div>
+            <div class="cast-title-label">@Model.Title</div>
+
+            @if (!string.IsNullOrEmpty(Model.OverView))
+            {
+                <div class="cast-overview">@Model.OverView</div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Biography))
+            {
+                <div class="cast-bio">@Model.Biography</div>
+            }
+
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-label">Movies</div>
+                    <div class="stat-value">@Model.Movies.Count</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Series</div>
+                    <div class="stat-value">@Model.Serieses.Count</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Total</div>
+                    <div class="stat-value">@Model.FilmographyCount</div>
+                </div>
+            </div>
+
+            <!-- Oynadığı Filmler -->
+            <div class="works-section">
+                <div class="section-label">🎬 Movies</div>
+                <div class="works-list">
+                    @if (Model.Movies.Any())
+                    {
+                        @foreach (var movie in Model.Movies)
+                        {
+                            <span class="work-pill movie">@movie</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="work-pill empty">No movies yet</span>
+                    }
+                </div>
+            </div>
+
+            <!-- Oynadığı Diziler -->
+            <div class="works-section">
+                <div class="section-label">📺 Series</div>
+                <div class="works-list">
+                    @if (Model.Serieses.Any())
+                    {
+                        @foreach (var series in Model.Serieses)
+                        {
+                            <span class="work-pill series">@series</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="work-pill empty">No series yet</span>
+                    }
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a asp-area="Admin"
+                   asp-controller="Cast"
+                   asp-action="UpdateCast"
+                   asp-route-id="@Model.Id"
+                   class="btn-edit">✏️ Edit Cast</a>
+                <a href="javascript:history.back()" class="btn-back">← Back to List</a>
+            </div>
+
+        </div>
+    </div>
+</div>

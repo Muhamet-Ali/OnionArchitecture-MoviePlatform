@@ -1,0 +1,189 @@
+﻿@using MovieApi.Dto.DTOs.CastDtos
+@model GetCastByIdQueryDto
+
+@{
+    ViewData["Title"] = "GetCastDetail";
+    Layout = "~/Views/UserWebUILayout/LayoutUI.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="page-single movie-single movie_single">
+    <div class="container">
+        <div class="row ipad-width2">
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="movie-img sticky-sb">
+                    <img src="@(Model.ImageUrl ?? "/Film-Review-Movie-Database/images/92.jpg")" alt="@Model.Name @Model.Surname">
+                </div>
+            </div>
+
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="movie-single-ct main-content">
+
+                    <h1 class="bd-hd">@Model.Name @Model.Surname</h1>
+
+                    <div class="social-btn">
+                        <div class="hover-bnt">
+                            <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>share</a>
+                            <div class="hvr-item">
+                                <a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-tabs">
+                        <div class="tabs">
+                            <ul class="tab-links tabs-mv">
+                                <li class="active"><a href="#overview">Overview</a></li>
+                                <li><a href="#movies">Movies</a></li>
+                                <li><a href="#series">Series</a></li>
+                            </ul>
+                            <div class="tab-content">
+
+                                <div id="overview" class="tab active">
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-12 col-xs-12">
+
+                                            @if (!string.IsNullOrEmpty(Model.OverView))
+                                            {
+                                                <div class="title-hd-sm">
+                                                    <h4>Overview</h4>
+                                                </div>
+                                                <p>@Model.OverView</p>
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(Model.Biography))
+                                            {
+                                                <div class="title-hd-sm">
+                                                    <h4>Biography</h4>
+                                                </div>
+                                                <p>@Model.Biography</p>
+                                            }
+
+                                            @if (Model.MovieCasts != null && Model.MovieCasts.Any())
+                                            {
+                                                <div class="title-hd-sm">
+                                                    <h4>Known For (Movies)</h4>
+                                                </div>
+                                                <div class="mvcast-item">
+                                                    @foreach (var movie in Model.MovieCasts.Take(4))
+                                                    {
+                                                        <div class="cast-it">
+                                                            <div class="cast-left">
+                                                                <a asp-controller="Movie" asp-action="MovieDetails" asp-route-id="@movie.MovieId">@movie.MovieName</a>
+                                                            </div>
+                                                            <p>... @movie.CharacterName</p>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+
+                                            @if (Model.SeriesCasts != null && Model.SeriesCasts.Any())
+                                            {
+                                                <div class="title-hd-sm">
+                                                    <h4>Known For (Series)</h4>
+                                                </div>
+                                                <div class="mvcast-item">
+                                                    @foreach (var series in Model.SeriesCasts.Take(4))
+                                                    {
+                                                        <div class="cast-it">
+                                                            <div class="cast-left">
+                                                                <a asp-controller="Series" asp-action="SeriesDetails" asp-route-id="@series.SeriesId">@series.SeriesName</a>
+                                                            </div>
+                                                            <p>... @series.CharacterName</p>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+
+                                        </div>
+
+                                        <div class="col-md-4 col-xs-12 col-sm-12">
+                                            <div class="sb-it">
+                                                <h6>Full Name:</h6>
+                                                <p>@Model.Name @Model.Surname</p>
+                                            </div>
+                                            <div class="sb-it">
+                                                <h6>Total Movies:</h6>
+                                                <p>@(Model.MovieCasts?.Count ?? 0)</p>
+                                            </div>
+                                            <div class="sb-it">
+                                                <h6>Total Series:</h6>
+                                                <p>@(Model.SeriesCasts?.Count ?? 0)</p>
+                                            </div>
+                                            <div class="ads">
+                                                <img src="/Film-Review-Movie-Database/images/uploads/ads1.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="movies" class="tab">
+                                    <div class="row">
+                                        <h3>Movies of</h3>
+                                        <h2>@Model.Name @Model.Surname</h2>
+                                        @if (Model.MovieCasts != null && Model.MovieCasts.Any())
+                                        {
+                                            @foreach (var movie in Model.MovieCasts)
+                                            {
+                                                <div class="movie-item-style-2">
+                                                    <div class="mv-item-infor">
+                                                        <h6>
+                                                            <a asp-controller="Movie" asp-action="MovieDetails" asp-route-id="@movie.MovieId">
+                                                                @movie.MovieName
+                                                            </a>
+                                                        </h6>
+                                                        <p>Character: <span>@movie.CharacterName</span></p>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p>No movies found.</p>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div id="series" class="tab">
+                                    <div class="row">
+                                        <h3>Series of</h3>
+                                        <h2>@Model.Name @Model.Surname</h2>
+                                        @if (Model.SeriesCasts != null && Model.SeriesCasts.Any())
+                                        {
+                                            @foreach (var series in Model.SeriesCasts)
+                                            {
+                                                <div class="movie-item-style-2">
+                                                    <div class="mv-item-infor">
+                                                        <h6>
+                                                            <a asp-controller="Series" asp-action="SeriesDetails" asp-route-id="@series.SeriesId">
+                                                                @series.SeriesName
+                                                            </a>
+                                                        </h6>
+                                                        <p>Character: <span>@series.CharacterName</span></p>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p>No series found.</p>
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

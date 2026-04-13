@@ -1,0 +1,261 @@
+﻿@model ResultAdminReviewByIdDto
+
+@{
+    ViewData["Title"] = "DetailReview";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .detail-wrapper {
+        padding: 32px;
+        max-width: 1100px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 28px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .review-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        overflow: hidden;
+        padding: 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .review-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .review-program-name {
+        font-size: 26px;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.5px;
+    }
+
+    .review-comment-box {
+        background: #f8fafc;
+        border-left: 4px solid #6366f1;
+        border-radius: 8px;
+        padding: 18px 22px;
+        font-size: 15px;
+        color: #334155;
+        line-height: 1.8;
+        font-style: italic;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+    }
+
+    .stat-box {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 14px 16px;
+        text-align: center;
+    }
+
+        .stat-box .stat-label {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .stat-box .stat-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+    .meta-row {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+        .meta-item span.label {
+            font-weight: 600;
+            color: #334155;
+        }
+
+    .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+        .status-pill.active {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .status-pill.inactive {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+    .spoiler-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+        .spoiler-pill.yes {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .spoiler-pill.no {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .btn-back {
+        padding: 9px 22px;
+        background: #f1f5f9;
+        color: #475569;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.18s;
+    }
+
+        .btn-back:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+</style>
+
+<div class="detail-wrapper">
+    <div class="page-title">
+        💬 Review Detail
+    </div>
+
+    <div class="review-card">
+
+        <!-- Header: Program Name + Status -->
+        <div class="review-header">
+            <div class="review-program-name">@Model.programName</div>
+            <div class="d-flex gap-2 align-items-center">
+                <span class="status-pill @(Model.Status ? "active" : "inactive")">
+                    @(Model.Status ? "● Active" : "● Inactive")
+                </span>
+                <span class="spoiler-pill @(Model.IsSpoiler ? "yes" : "no")">
+                    @(Model.IsSpoiler ? "⚠️ Spoiler" : "✅ No Spoiler")
+                </span>
+            </div>
+        </div>
+
+        <!-- Review Comment -->
+        <div class="review-comment-box">
+            "@Model.ReviewComment"
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">User Rating</div>
+                <div class="stat-value">⭐ @Model.UserRating</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Likes</div>
+                <div class="stat-value">👍 @Model.LikeCount</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Sentiment Score</div>
+                <div class="stat-value">@(Model.SentimentScore.HasValue? Model.SentimentScore.Value.ToString("0.00") : "—")</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Review Date</div>
+                <div class="stat-value" style="font-size:13px;font-weight:700;">@Model.ReviewDate.ToString("MMM dd, yyyy")</div>
+            </div>
+        </div>
+
+        <!-- Meta Info -->
+        <div class="meta-row">
+            <div class="meta-item">
+                👤 <span class="label">User ID:</span> @Model.UserId
+            </div>
+            @if (Model.MovieId.HasValue)
+            {
+                <div class="meta-item">
+                    🎬 <span class="label">Movie ID:</span> @Model.MovieId
+                </div>
+            }
+            @if (Model.SeriesId.HasValue)
+            {
+                <div class="meta-item">
+                    📺 <span class="label">Series ID:</span> @Model.SeriesId
+                </div>
+            }
+            @if (Model.EpisodeId.HasValue)
+            {
+                <div class="meta-item">
+                    🎞️ <span class="label">Episode ID:</span> @Model.EpisodeId
+                </div>
+            }
+        </div>
+
+        <!-- Actions -->
+        <div class="action-buttons">
+            <a class="btn btn-sm btn-warning"
+               asp-area="Admin"
+               asp-controller="Review"
+               asp-action="UpdateReview"
+               asp-route-id="@Model.Id">
+                ✏️ Update
+            </a>
+            <a href="javascript:history.back()" class="btn-back">← Back to List</a>
+        </div>
+
+    </div>
+</div>

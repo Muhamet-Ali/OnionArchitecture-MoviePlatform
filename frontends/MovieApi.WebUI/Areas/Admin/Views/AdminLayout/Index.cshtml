@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+    @await Component.InvokeAsync("_AdminLayoutHeadComponentPartial")
+
+<body>
+     <!--start wrapper-->
+    <div class="wrapper">
+        <!--start sidebar -->
+        @await Component.InvokeAsync("_AdminLayoutSidebarComponentPartial")
+        <!--end sidebar -->
+        <!--start top header-->
+        @await Component.InvokeAsync("_AdminLayoutHeaderComponentsPartial")
+        <!--end top header-->
+        <!-- start page content wrapper-->
+        <div class="page-content-wrapper">
+            <!-- start page content-->
+            <div class="page-content">
+                <!--start breadcrumb-->
+                @await Component.InvokeAsync("_AdminLayoutBredCumbComponentPartial")      
+                <!--end breadcrumb-->
+            @RenderBody()
+            </div>
+            <!-- end page content-->
+        </div>
+        <!--start switcher-->
+        @await Component.InvokeAsync("_AdminLayoutSwitcherComponentPartial")
+        <!--end switcher-->
+    </div>
+    @await Component.InvokeAsync("_AdminLayoutScriptComponentPartial")
+</body>
+</html>
